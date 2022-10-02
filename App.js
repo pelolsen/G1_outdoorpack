@@ -1,13 +1,56 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import StartPageComponent from './components/StartPageComponent';
+import SignInComponent from './components/SignInComponent';
+import LoginComponent from './components/LoginComponent';
+import firebase from "firebase/compat"
+import * as React from "react";
+import {useState, useEffect} from 'react'
+import StackNavigator from './components/StackNavigator';
+import ProfileScreen from './components/ProfileScreen';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBDSAnjqfqqH4hgHQWTHoWpJLcvj0ewhsM",
+  authDomain: "godkendelse1.firebaseapp.com",
+  projectId: "godkendelse1",
+  storageBucket: "godkendelse1.appspot.com",
+  messagingSenderId: "1043840074494",
+  appId: "1:1043840074494:web:94a5da5445d793ef39dbaf"
+};
+
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+  }
+  const [user, setUser] = useState({ loggedIn: false });
+
+  function onAuthStateChange(callback) {
+    return firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        callback({loggedIn: true, user: user});
+      } else {
+        callback({loggedIn: false});
+      }
+    });
+  }
+  useEffect(() => {
+    const unsubscribe = onAuthStateChange(setUser);
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
+  const GuestPage = () => {
+    return(
+      <NavigationContainer>
+        <StackNavigator/>
+      </NavigationContainer>
+    )
+  }
+  
+  return user.loggedIn ? <ProfileScreen /> : <GuestPage/> ;
 }
 
 const styles = StyleSheet.create({
