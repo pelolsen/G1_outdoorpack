@@ -18,7 +18,6 @@ function ProfileScreen ({navigate}) {
             <Text style={styles.title}>Current user: {firebase.auth().currentUser.email}</Text>
             <View style={styles.buttonsContainer}>
                 <ButtonComponent type = "primary" content={"Log Out"} onPress = {()=>  handleLogOut()}/>
-                <ButtonComponent type = "secondary" content={"Update your Details"}/>
             </View>
         </View>
     );
