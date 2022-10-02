@@ -42,7 +42,7 @@ export default function App() {
     };
   }, []);
 
-  const GuestPage = () => {
+  const LoginPage = () => {
     return(
       <NavigationContainer>
         <StackNavigator/>
@@ -50,7 +50,7 @@ export default function App() {
     )
   }
   
-  return user.loggedIn ? <ProfileScreen /> : <GuestPage/> ;
+  return user.loggedIn ? <ProfileScreen /> : <LoginPage/> ;
 }
 
 const styles = StyleSheet.create({

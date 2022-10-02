@@ -4,12 +4,10 @@ import styles from './styles'
 import ButtonComponent from '../ButtonComponent'
 import firebase from "firebase/compat"
 import { initializeApp } from "firebase/app";
-//import firebase from "firebase/compat"
-//import { initializeApp } from "firebase/app";
+
 
 
 const LoginComponent = ({navigation})=> {
-    //Sign In form
     const handleSubmit = async() => {
         try {
             await firebase.auth().signInWithEmailAndPassword(email, password).then((data)=>{
@@ -25,9 +23,7 @@ const LoginComponent = ({navigation})=> {
     const [password, setPassword] = useState('')
     const [isCompleted, setCompleted] = useState(false)
     const [errorMessage, setErrorMessage] = useState(null)
-    //const SignInButton = () =>{
-    //    return <Button title="Submit" onPress={()=> handleSubmit()} />
-    //}
+
     return (
         <View style={styles.carcontainer}>
         <ImageBackground 

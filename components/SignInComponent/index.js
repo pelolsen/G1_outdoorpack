@@ -7,7 +7,6 @@ import { initializeApp } from "firebase/app";
 
 
 const SignInComponent = ({navigation})=> {
-    //Sign In form
     const handleSubmit = async() => {
         try {
             await firebase.auth().createUserWithEmailAndPassword(email, password).then((data)=>{

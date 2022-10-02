@@ -1,3 +1,4 @@
+//STADIG UNDER UDVIKLING//
 import {Text, View, StyleSheet } from 'react-native';
 import * as React from "react";
 import { createStackNavigator } from '@react-navigation/stack';
@@ -7,8 +8,8 @@ import SignInComponent from './SignInComponent';
 import ButtonComponent from './ButtonComponent';
 
 
-//Husk at ændre navn
-export default function StackNavigator() {
+//Fungere ikke endnu
+export default function LoggedinStackNavigator() {
     const Stack = createStackNavigator()
     return (
             <Stack.Navigator initialRouteName="ProfileScreen">
