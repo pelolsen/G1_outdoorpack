@@ -8,11 +8,17 @@ import firebase from "firebase/compat"
 import * as React from "react";
 import {useState, useEffect} from 'react'
 import StackNavigator from './components/StackNavigator';
-import ProfileScreen from './components/ProfileScreen';
+import ProfileScreen from './components/MenuScreens/ProfileScreen';
+import MenuScreen from './components/MenuScreens/MenuScreen';
+import NewTourScreen from './components/MenuScreens/NewTourScreen';
+import LoggedinStackNavigator from './components/MenuScreens/LoggedinStackNavigator';
+import PreviousTourScreen from './components/MenuScreens/PreviousTourScreen';
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyBDSAnjqfqqH4hgHQWTHoWpJLcvj0ewhsM",
   authDomain: "godkendelse1.firebaseapp.com",
+  databaseURL: "https://godkendelse1-default-rtdb.europe-west1.firebasedatabase.app",
   projectId: "godkendelse1",
   storageBucket: "godkendelse1.appspot.com",
   messagingSenderId: "1043840074494",
@@ -49,8 +55,20 @@ export default function App() {
       </NavigationContainer>
     )
   }
+  const LogedInPage = () => {
+    return(
+      <NavigationContainer>
+        <LoggedinStackNavigator/>
+      </NavigationContainer>
+    )
+  }
   
-  return user.loggedIn ? <ProfileScreen /> : <LoginPage/> ;
+  return user.loggedIn ? <LogedInPage/> : <LoginPage/> ;
+  //return <NewTourScreen/>
+  //return <PreviousTourScreen/>
+  //return <MenuScreen/>
+  //return <LogedInPage/>
+    
 }
 
 const styles = StyleSheet.create({
