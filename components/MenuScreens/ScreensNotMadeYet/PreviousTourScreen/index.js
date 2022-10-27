@@ -11,8 +11,8 @@ import {
 import firebase from 'firebase/compat';
 import {useEffect, useState} from "react";
 import styles from './styles'
-import ButtonComponent from '../../ButtonComponent';
-import { InputData } from '../../../models/selectitemdata';
+import ButtonComponent from '../../../ButtonComponent';
+import { InputData } from '../../../../models/selectitemdata';
 import DropDownPicker from 'react-native-dropdown-picker';
 
 

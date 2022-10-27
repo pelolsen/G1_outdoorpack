@@ -6,9 +6,11 @@ import MenuButtonComponent from '../MenuButtonComponent';
 import { NavigationContainer } from '@react-navigation/native';
 
 function MenuScreen ({navigation}) {
+    //Log User out
     const handleLogOut = async () => {
         await firebase.auth().signOut();
     };
+    //Ekstra security if Firebase is not working properly
     if (!firebase.auth().currentUser) {
         return <View><Text>Not found</Text></View>;
     }

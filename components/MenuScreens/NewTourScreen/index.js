@@ -57,7 +57,7 @@ const NewTourScreen = ({navigation,route}) => {
     const [open6, setOpen6] = useState(false);
     const [valueGender, setValueGender] = useState(null);
     const [itemsGender, setItemsGender] = useState(selectData.gender);
-
+//Algoritme til at montere listen
     const listMaker = async ()=>{
       const newTour = {
         location: valueLocation,
@@ -68,15 +68,13 @@ const NewTourScreen = ({navigation,route}) => {
         level: valueLevel,
         gender: valueGender
     }
-    console.log('====================================');
-    console.log(newTour);
-    console.log('====================================');
       let list ={}
       const dbRef = firebase.database().ref();
 
       //-----------BACKPACK---------------
       let tourlength = parseInt(newTour.tourlength)
       console.log(tourlength);
+      //orderByChild sammenlagt med equalTo gør at jeg kan udvægle bestemte genstande fra databasen 
       await dbRef.child('backpacks').orderByChild('tourlength').equalTo(tourlength).get().then((snapshot) => {
           if (snapshot.exists()) { 
               Object.assign(list, snapshot.val())
@@ -163,7 +161,7 @@ const NewTourScreen = ({navigation,route}) => {
           }).catch((error) => {
               console.error(error);
           });}
-          /*
+          /* MANGLER AT TILSÆTTE JAKKER TIL DATABASE
            //--------JACKETS---------
            await dbRef.child('jackets').child(gender).orderByChild('temperature').equalTo(temperature).get().then((snapshot) => {
               if (snapshot.exists()) {
@@ -237,6 +235,7 @@ const NewTourScreen = ({navigation,route}) => {
   }
     const { location, tourlength, temperature, rain, terrain, level, gender } = newTour;
     const uemail = firebase.auth().currentUser.email
+    //Bruges til testing \/
     //const uemail = 'ppp@ppp.dk'
     if(location === null || tourlength === null || temperature === null || rain === null || terrain === null || level === null || gender === null ){
         return Alert.alert('Please fill all the fields');
@@ -250,7 +249,6 @@ const NewTourScreen = ({navigation,route}) => {
             .push({ uemail, location, tourlength, temperature, rain, terrain, level, gender, packlist })
             .then((snap) => {
                 //Det her er kun for at få den unikt ID som push method genere. 
-                //HUSK at slette hvis den ikke bruges
                 let listId = snap.key
                 navigation.navigate("PackList", {listId})
                 

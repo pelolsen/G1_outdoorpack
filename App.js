@@ -12,7 +12,7 @@ import ProfileScreen from './components/MenuScreens/ProfileScreen';
 import MenuScreen from './components/MenuScreens/MenuScreen';
 import NewTourScreen from './components/MenuScreens/NewTourScreen';
 import LoggedinStackNavigator from './components/MenuScreens/LoggedinStackNavigator';
-import PreviousTourScreen from './components/MenuScreens/PreviousTourScreen';
+import PreviousTourScreen from './components/MenuScreens/ScreensNotMadeYet/PreviousTourScreen';
 
 
 const firebaseConfig = {
