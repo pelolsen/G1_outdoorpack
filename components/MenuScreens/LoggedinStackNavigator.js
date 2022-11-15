@@ -7,6 +7,7 @@ import MenuScreen from './MenuScreen';
 import NewTourScreen from './NewTourScreen';
 import MenuButtonComponent from './MenuButtonComponent';
 import PackListScreen from './PackListScreen';
+import ItemDetails from './ItemDetails';
 
 
 //Fungere ikke endnu
@@ -51,6 +52,7 @@ export default function LoggedinStackNavigator() {
                 <Stack.Screen name="MenuScreen" component={MenuScreen} options={{headerShown: false}}/>
                 <Stack.Screen name="NewTour" component={NewTourScreen} options={{headerShown: false}}/>
                 <Stack.Screen name="PackList" component={PackListScreen} options={{headerShown: false}}/>
+                <Stack.Screen name="Item Details" component={ItemDetails} options={{headerShown: false}}/>
             </Stack.Navigator>
     );
 }

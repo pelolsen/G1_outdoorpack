@@ -35,15 +35,20 @@ const PackListScreen = ({route, navigation}) => {
         const item = Object.entries(list).find( item => item[0] === id /*id*/)
         //Mangler at lave Item details
         console.log(item);
-        //navigation.navigate('Item Details', { item });
+        navigation.navigate('Item Details', { item });
     };
-
+    console.log('==============LIST MED ID======================');
+    console.log(list);
+    console.log('====================================');
     // Flatlist forventer et array. Derfor tager vi alle values fra vores cars objekt, og bruger som array til listen
     const itemArray = Object.values(list);
     console.log('====================================');
     console.log(itemArray);
     console.log('====================================');
     const itemKeys = Object.keys(list);
+    console.log('================KEYS====================');
+    console.log(itemKeys);
+    console.log('====================================');
 
 
     return (
@@ -51,9 +56,11 @@ const PackListScreen = ({route, navigation}) => {
         <Text style={styles.title}>PACKING LIST</Text>
         <FlatList
             data={itemArray}
+            style={styles.listen}
             // Vi bruger carKeys til at finde ID på den aktuelle bil og returnerer dette som key, og giver det med som ID til CarListItem
             keyExtractor={(item, index) => itemKeys[index]}
             renderItem={({ item, index }) => {
+                console.log([item, index]);
                 return(
                     <TouchableOpacity style={styles.container} onPress={() => handleSelectItem(itemKeys[index])}>
                         <Text style={styles.text}>

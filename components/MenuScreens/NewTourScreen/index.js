@@ -262,26 +262,26 @@ const NewTourScreen = ({navigation,route}) => {
   
     
     return (
-        <View style={{flex: 1, justifyContent: 'center', backgroundColor: 'grey'}}>
+        <View style={{flex: 1, justifyContent: 'center', backgroundColor: '#23272a'}}>
             <View style={{flex: 1, justifyContent: 'center', width: '80%', left: 35, bottom: 100}}>
-        <ScrollView
-          contentContainerStyle={{flexGrow : 1, justifyContent : 'center'}}>
+        <View style={{flex: 1, top: 60}}>
           <Text style={{flex: 1, color: 'black'}}>Hi</Text>
-          <View>
+          <View style={{paddingBottom:10}}>
               <Text>Where are you going?</Text>
           </View>
-          <View>
+          <View style={{paddingBottom:15, height: 60}}>
           <TextInput
             placeholder={'Location'}
+            placeholderTextColor="green"
             value={valueLocation}
             onChangeText={(txt)=>setValueLocation(txt)}
-            style={{borderWidth: 2,padding:5,flex: 1}}
+            style={{borderWidth: 0,padding:5,flex: 1,height: 40,backgroundColor: '#36393f', color: 'white' }}
           />
           </View>
-          <View>
+          <View style={{paddingBottom:10}}>
               <Text>How long is your tour?</Text>
           </View>
-          <View style={{zIndex: open ? 1: 0 }}>
+          <View style={{zIndex: open ? 1: 0, paddingBottom:15 }}>
           <DropDownPicker
             listMode="SCROLLVIEW"
             schema={{
@@ -296,10 +296,10 @@ const NewTourScreen = ({navigation,route}) => {
             setValue={setValueTourlength}
             setItems={setItems}
           /></View>
-          <View>
+          <View style={{paddingBottom:10}}>
               <Text>How is the temperature like?</Text>
           </View>
-          <View style={{zIndex: open2 ? 1: 0 }}>
+          <View style={{zIndex: open2 ? 1: 0, paddingBottom:15 }}>
           <DropDownPicker
             listMode="SCROLLVIEW"
             schema={{
@@ -314,10 +314,10 @@ const NewTourScreen = ({navigation,route}) => {
             setValue={setValueTemperature}
             setItems={setItemsTemp}
             /></View>
-            <View>
+            <View style={{paddingBottom:10}}>
               <Text>Is it Raining?</Text>
             </View>
-            <View style={{zIndex: open3 ? 1: 0 }}>
+            <View style={{zIndex: open3 ? 1: 0, paddingBottom:15 }}>
             <DropDownPicker
             listMode="SCROLLVIEW"
             schema={{
@@ -332,10 +332,10 @@ const NewTourScreen = ({navigation,route}) => {
             setValue={setValueRain}
             setItems={setItemsRain}
           /></View>
-          <View>
+          <View style={{paddingBottom:10}}>
               <Text>Which kind of Terrain is it?</Text>
           </View>
-          <View style={{zIndex: open4 ? 1: 0 }}>
+          <View style={{zIndex: open4 ? 1: 0, paddingBottom:15 }}>
           <DropDownPicker
             listMode="SCROLLVIEW"
             schema={{
@@ -350,10 +350,10 @@ const NewTourScreen = ({navigation,route}) => {
             setValue={setValueTerrain}
             setItems={setItemsTerreain}
           /></View>
-          <View>
+          <View style={{paddingBottom:10}}>
               <Text>What's your level?</Text>
           </View>
-          <View style={{zIndex: open5 ? 1: 0 }}>
+          <View style={{zIndex: open5 ? 1: 0, paddingBottom:15 }}>
           <DropDownPicker
             listMode="SCROLLVIEW"
             schema={{
@@ -368,10 +368,10 @@ const NewTourScreen = ({navigation,route}) => {
             setValue={setValueLevel}
             setItems={setItems5}
             /></View>
-            <View>
+            <View style={{paddingBottom:10}}>
               <Text>Gender</Text>
             </View>
-            <View style={{zIndex: open6 ? 1: 0 }}>
+            <View style={{zIndex: open6 ? 1: 0, paddingBottom:15}}>
             <DropDownPicker
             listMode="SCROLLVIEW"
             schema={{
@@ -385,12 +385,12 @@ const NewTourScreen = ({navigation,route}) => {
             setOpen={setOpen6}
             setValue={setValueGender}
             setItems={setItemsGender}
-            /></View>
-            </ScrollView>
-            <Button title={"Create Tour"} onPress={() => handleSave()}/>
-            <View>
+            />
+            <View style={{zIndex: 2, paddingBottom:15, paddingTop: 25}}>
             <ButtonComponent type = "primary" content={"Create Packing List"} onPress = {()=>  handleSave()}/>
             </View>
+            </View>
+            </View >
             </View>
       </View>
     );

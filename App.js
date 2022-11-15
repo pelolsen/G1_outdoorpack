@@ -8,11 +8,12 @@ import firebase from "firebase/compat"
 import * as React from "react";
 import {useState, useEffect} from 'react'
 import StackNavigator from './components/StackNavigator';
-import ProfileScreen from './components/MenuScreens/ProfileScreen';
 import MenuScreen from './components/MenuScreens/MenuScreen';
 import NewTourScreen from './components/MenuScreens/NewTourScreen';
 import LoggedinStackNavigator from './components/MenuScreens/LoggedinStackNavigator';
 import PreviousTourScreen from './components/MenuScreens/ScreensNotMadeYet/PreviousTourScreen';
+import ItemDetails from './components/MenuScreens/ItemDetails';
+
 
 
 const firebaseConfig = {
@@ -68,6 +69,7 @@ export default function App() {
   //return <PreviousTourScreen/>
   //return <MenuScreen/>
   //return <LogedInPage/>
+  //return <ItemDetails/>
     
 }
 
