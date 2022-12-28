@@ -11,8 +11,11 @@ import StackNavigator from './components/StackNavigator';
 import MenuScreen from './components/MenuScreens/MenuScreen';
 import NewTourScreen from './components/MenuScreens/NewTourScreen';
 import LoggedinStackNavigator from './components/MenuScreens/LoggedinStackNavigator';
-import PreviousTourScreen from './components/MenuScreens/ScreensNotMadeYet/PreviousTourScreen';
+import PreviousTourScreen from './components/MenuScreens/PreviousTourScreen';
 import ItemDetails from './components/MenuScreens/ItemDetails';
+import PopularPacks from './components/MenuScreens/PopularPacks';
+import ListDumpScreen from './dump/kodedump/ListDumpScreen';
+import ContactScreen from './components/MenuScreens/ContactScreen';
 
 
 
@@ -65,11 +68,9 @@ export default function App() {
   }
   
   return user.loggedIn ? <LogedInPage/> : <LoginPage/> ;
-  //return <NewTourScreen/>
+  //return <ListDumpScreen/>
   //return <PreviousTourScreen/>
-  //return <MenuScreen/>
-  //return <LogedInPage/>
-  //return <ItemDetails/>
+  //return <ContactScreen/>
     
 }
 

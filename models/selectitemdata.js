@@ -35,5 +35,34 @@ export const InputData = {
         {key: 'male', value: 'Male'},
         {key: 'female', value: 'Female'},
     ],
+    food: [
+        {key: '1', value: 'Yes'},
+        {key: '0', value: 'No'},
+    ],
+    kitchen: [
+        {key: '1', value: 'Yes'},
+        {key: '0', value: 'No'},
+    ],
+    sleepingkit: [
+        {key: '1', value: 'Yes'},
+        {key: '0', value: 'No'},
+    ],
+    sizetop: [
+        {key: 'xs', value: 'XS'},
+        {key: 's', value: 'S'},
+        {key: 'm', value: 'M'},
+        {key: 'l', value: 'L'},
+        {key: 'xl', value: 'XL'},
+        {key: 'xxl', value: 'XXL'},
+    ],
+    sizebottom: [
+        {key: 'xs', value: 'XS'},
+        {key: 's', value: 'S'},
+        {key: 'm', value: 'M'},
+        {key: 'l', value: 'L'},
+        {key: 'xl', value: 'XL'},
+        {key: 'xxl', value: 'XXL'},
+    ],
+    
 
 }

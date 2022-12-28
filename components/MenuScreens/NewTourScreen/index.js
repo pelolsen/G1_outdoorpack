@@ -14,27 +14,27 @@ import styles from './styles'
 import ButtonComponent from '../../ButtonComponent';
 import { InputData } from '../../../models/selectitemdata';
 import DropDownPicker from 'react-native-dropdown-picker';
-
-
-
-  
+import Ionicons from 'react-native-vector-icons/Ionicons'
 
 const NewTourScreen = ({navigation,route}) => {
  
-
-  useEffect(() => {
-    return () => {
-        setValueLocation(null)
-        setValueTourlength(null)
-        setValueTemperature(null)
-        setValueRain(null)
-        setValueTerrain(null)
-        setValueLevel(null)
-        setValueGender(null)
-        setListId('')
-    };
-}, []);
-
+    useEffect(() => {
+        return () => {
+            setValueLocation(null)
+            setValueTourlength(null)
+            setValueTemperature(null)
+            setValueRain(null)
+            setValueTerrain(null)
+            setValueLevel(null)
+            setValueGender(null)
+            setValueSizetop(null)
+            setValueSizebottom(null)
+            setValueFood(null)
+            setValueKitchen(null)
+            setValueSleepingkit(null)
+            setListId('')
+        };
+    }, []);
 
     const selectData = InputData
     const [listId, setListId] = useState('')
@@ -57,6 +57,22 @@ const NewTourScreen = ({navigation,route}) => {
     const [open6, setOpen6] = useState(false);
     const [valueGender, setValueGender] = useState(null);
     const [itemsGender, setItemsGender] = useState(selectData.gender);
+    const [open7, setOpen7] = useState(false);
+    const [valueSizetop, setValueSizetop] = useState(null);
+    const [itemsSizetop, setItemsSizetop] = useState(selectData.sizetop);
+    const [open8, setOpen8] = useState(false);
+    const [valueSizebottom, setValueSizebottom] = useState(null);
+    const [itemsSizebottom, setItemsSizebottom] = useState(selectData.sizebottom);
+    const [open9, setOpen9] = useState(false);
+    const [valueFood, setValueFood] = useState(null);
+    const [itemsFood, setItemsFood] = useState(selectData.food);
+    const [open10, setOpen10] = useState(false);
+    const [valueKitchen, setValueKitchen] = useState(null);
+    const [itemsKitchen, setItemsKitchen] = useState(selectData.kitchen);
+    const [open11, setOpen11] = useState(false);
+    const [valueSleepingkit, setValueSleepingkit] = useState(null);
+    const [itemsSleepingkit, setItemsSleepingkit] = useState(selectData.sleepingkit);
+
 //Algoritme til at montere listen
     const listMaker = async ()=>{
       const newTour = {
@@ -66,7 +82,12 @@ const NewTourScreen = ({navigation,route}) => {
         rain: valueRain,
         terrain: valueTerrain,
         level: valueLevel,
-        gender: valueGender
+        gender: valueGender,
+        sizetop: valueSizetop,
+        sizebottom: valueSizebottom,
+        food: valueFood,
+        kitchen: valueKitchen,
+        sleepingkit: valueSleepingkit
     }
       let list ={}
       const dbRef = firebase.database().ref();
@@ -148,9 +169,9 @@ const NewTourScreen = ({navigation,route}) => {
           }).catch((error) => {
               console.error(error);
           });
-      }
+        }
       //------FLECE---------
-      if(temperature <= 3){
+        if(temperature <= 3){
           await dbRef.child('fleece').child(gender).orderByChild('temperature').equalTo(temperature).get().then((snapshot) => {
               if (snapshot.exists()) {
                   Object.assign(list, snapshot.val())
@@ -160,8 +181,9 @@ const NewTourScreen = ({navigation,route}) => {
               }
           }).catch((error) => {
               console.error(error);
-          });}
-          /* MANGLER AT TILSÆTTE JAKKER TIL DATABASE
+          });
+        }
+          
            //--------JACKETS---------
            await dbRef.child('jackets').child(gender).orderByChild('temperature').equalTo(temperature).get().then((snapshot) => {
               if (snapshot.exists()) {
@@ -184,30 +206,19 @@ const NewTourScreen = ({navigation,route}) => {
           }).catch((error) => {
               console.error(error);
           });
+      //-------HAT----------
+      if(temperature <= 3){
+        await dbRef.child('hat').orderByChild('temperature').equalTo(temperature).get().then((snapshot) => {
+            if (snapshot.exists()) {
+                Object.assign(list, snapshot.val())
+                console.log('✅ Sleepingbag');
+            } else {
+                console.log("No data available");
+            }
+        }).catch((error) => {
+            console.error(error);
+        });
       }
-      let hattype;
-      if(temperature > 3 && rain == 0){
-          hattype = 'sunhat'
-      } else if (temperature <= 3 && temperature > 1 && rain == 0){
-          hattype = 'benny'
-      }else if (temperature <= 3 && temperature > 1 && rain == 1){
-          hattype = 'rainbenny'
-      } else if (temperature == 1){
-          hattype = 'winter'
-      }
-      //måske inddel hat i genders også... finder vi sgu ud af
-      if(hattype != undefined){
-          await dbRef.child('hat').child(hattype).orderByChild('temperature').equalTo(temperature).get().then((snapshot) => {
-              if (snapshot.exists()) {
-  
-                  Object.assign(list, snapshot.val())
-              } else {
-                  console.log("No data available");
-              }
-          }).catch((error) => {
-              console.error(error);
-          });
-      }*/
       //-------SOCKS-------
       await dbRef.child('socks').child(gender).get().then((snapshot) => {
           if (snapshot.exists()) {
@@ -219,6 +230,72 @@ const NewTourScreen = ({navigation,route}) => {
       }).catch((error) => {
           console.error(error);
       });
+      //--------FOOD--------
+      const food = parseInt(newTour.food)
+      if(food == 1){
+        await dbRef.child('food').orderByChild('tourlength').equalTo(tourlength).get().then((snapshot) => {
+            if (snapshot.exists()) { 
+                Object.assign(list, snapshot.val())
+                console.log('✅ Food');
+            } else {
+                console.log("No data available");
+            }
+        }).catch((error) => {
+            console.error(error);
+        }); 
+      }
+      //--------KITCHEN--------
+      const kitchen = parseInt(newTour.kitchen)
+      if(kitchen == 1){
+        await dbRef.child('kitchen').get().then((snapshot) => {
+            if (snapshot.exists()) {
+                Object.assign(list, snapshot.val())
+                console.log('✅ Kitchen');
+            } else {
+                console.log("No data available");
+            }
+        }).catch((error) => {
+            console.error(error);
+        });
+      }
+      //--------SLEEPINGKIT--------
+      const sleep = parseInt(newTour.sleepingkit)
+      if(sleep == 1){
+        //-----------TENT-------------
+        await dbRef.child('tent').get().then((snapshot) => {
+            if (snapshot.exists()) {
+                Object.assign(list, snapshot.val())
+                console.log('✅ Tent');
+            } else {
+                console.log("No data available");
+            }
+        }).catch((error) => {
+            console.error(error);
+        });
+        //--------SLEEPING BAG-------------
+        await dbRef.child('sleepingbag').orderByChild('temperature').equalTo(temperature).get().then((snapshot) => {
+            if (snapshot.exists()) {
+                Object.assign(list, snapshot.val())
+                console.log('✅ Sleepingbag');
+            } else {
+                console.log("No data available");
+            }
+        }).catch((error) => {
+            console.error(error);
+        });
+        //--------SLEEPING PAD-------------
+        await dbRef.child('sleepingpad').get().then((snapshot) => {
+            if (snapshot.exists()) {
+                Object.assign(list, snapshot.val())
+                console.log('✅ Sleepingpad');
+            } else {
+                console.log("No data available");
+            }
+        }).catch((error) => {
+            console.error(error);
+        });
+
+      }
       console.log("✅✅✅✅ FINISHED LIST ✅✅✅✅");
       console.log(list);
       return list
@@ -231,13 +308,18 @@ const NewTourScreen = ({navigation,route}) => {
       rain: valueRain,
       terrain: valueTerrain,
       level: valueLevel,
-      gender: valueGender
+      gender: valueGender,
+      sizetop: valueSizetop,
+      sizebottom: valueSizebottom,
+      food: valueFood,
+      kitchen: valueKitchen,
+      sleepingkit: valueSleepingkit
   }
-    const { location, tourlength, temperature, rain, terrain, level, gender } = newTour;
+    const { location, tourlength, temperature, rain, terrain, level, gender, sizetop, sizebottom, food, kitchen, sleepingkit} = newTour;
     const uemail = firebase.auth().currentUser.email
     //Bruges til testing \/
     //const uemail = 'ppp@ppp.dk'
-    if(location === null || tourlength === null || temperature === null || rain === null || terrain === null || level === null || gender === null ){
+    if(location === null || tourlength === null || temperature === null || rain === null || terrain === null || level === null || gender === null || sizetop === null || sizebottom === null || food=== null || kitchen === null || sleepingkit === null){
         return Alert.alert('Please fill all the fields');
     }
     const packlist = await listMaker()
@@ -246,7 +328,7 @@ const NewTourScreen = ({navigation,route}) => {
         firebase
             .database()
             .ref('/UserTours/')
-            .push({ uemail, location, tourlength, temperature, rain, terrain, level, gender, packlist })
+            .push({ uemail, location, tourlength, temperature, rain, terrain, level, gender, sizetop, sizebottom, food, kitchen, sleepingkit, packlist })
             .then((snap) => {
                 //Det her er kun for at få den unikt ID som push method genere. 
                 let listId = snap.key
@@ -257,164 +339,266 @@ const NewTourScreen = ({navigation,route}) => {
     } catch (error) {
         console.log(`Error: ${error.message}`);
     }
-};
-  
-  
-    
+    };
+
     return (
-        <View style={{flex: 1, justifyContent: 'center', backgroundColor: '#23272a'}}>
-            <View style={{flex: 1, justifyContent: 'center', width: '80%', left: 35, bottom: 100}}>
-        <View style={{flex: 1, top: 60}}>
-          <Text style={{flex: 1, color: 'black'}}>Hi</Text>
-          <View style={{paddingBottom:10}}>
-              <Text>Where are you going?</Text>
-          </View>
-          <View style={{paddingBottom:15, height: 60}}>
-          <TextInput
-            placeholder={'Location'}
-            placeholderTextColor="green"
-            value={valueLocation}
-            onChangeText={(txt)=>setValueLocation(txt)}
-            style={{borderWidth: 0,padding:5,flex: 1,height: 40,backgroundColor: '#36393f', color: 'white' }}
-          />
-          </View>
-          <View style={{paddingBottom:10}}>
-              <Text>How long is your tour?</Text>
-          </View>
-          <View style={{zIndex: open ? 1: 0, paddingBottom:15 }}>
-          <DropDownPicker
-            listMode="SCROLLVIEW"
-            schema={{
-              label: 'value',
-              value: 'key'
-            }}
-            placeholder="Choose tour length"
-            open={open}
-            value={valueTourlength}
-            items={items}
-            setOpen={setOpen}
-            setValue={setValueTourlength}
-            setItems={setItems}
-          /></View>
-          <View style={{paddingBottom:10}}>
-              <Text>How is the temperature like?</Text>
-          </View>
-          <View style={{zIndex: open2 ? 1: 0, paddingBottom:15 }}>
-          <DropDownPicker
-            listMode="SCROLLVIEW"
-            schema={{
-              label: 'value',
-              value: 'key'
-            }}
-            placeholder="Choose temperature"
-            open={open2}
-            value={valueTemperature}
-            items={itemsTemp}
-            setOpen={setOpen2}
-            setValue={setValueTemperature}
-            setItems={setItemsTemp}
-            /></View>
-            <View style={{paddingBottom:10}}>
-              <Text>Is it Raining?</Text>
+        <View style={styles.container}>
+            <View style={styles.titlecontainer}>
+                <View style={styles.backbutton}>
+                <Ionicons
+                      name={'arrow-back'}
+                      size={30}
+                      color={'white'}
+                      style={{top: 55}}
+                      onPress = {() => navigation.goBack()}
+
+                  />
+                </View>
+                <View style={styles.titleinnercontainer}>
+                    <Text style={styles.title}>NEW TRIP</Text>
+                </View>
+                <View style={styles.homebutton}>
+                <Ionicons
+                      name={'home-outline'}
+                      size={30}
+                      color={'white'}
+                      style={{top: 55}}
+                      onPress = {() => navigation.navigate('MenuScreen')}
+
+                  />
+                </View>
             </View>
-            <View style={{zIndex: open3 ? 1: 0, paddingBottom:15 }}>
-            <DropDownPicker
-            listMode="SCROLLVIEW"
-            schema={{
-              label: 'value',
-              value: 'key'
-            }}
-            placeholder="Is is Raining?"
-            open={open3}
-            value={valueRain}
-            items={itemsRain}
-            setOpen={setOpen3}
-            setValue={setValueRain}
-            setItems={setItemsRain}
-          /></View>
-          <View style={{paddingBottom:10}}>
-              <Text>Which kind of Terrain is it?</Text>
-          </View>
-          <View style={{zIndex: open4 ? 1: 0, paddingBottom:15 }}>
-          <DropDownPicker
-            listMode="SCROLLVIEW"
-            schema={{
-              label: 'value',
-              value: 'key'
-            }}
-            placeholder="Choose Terrain"
-            open={open4}
-            value={valueTerrain}
-            items={itemsTerreain}
-            setOpen={setOpen4}
-            setValue={setValueTerrain}
-            setItems={setItemsTerreain}
-          /></View>
-          <View style={{paddingBottom:10}}>
-              <Text>What's your level?</Text>
-          </View>
-          <View style={{zIndex: open5 ? 1: 0, paddingBottom:15 }}>
-          <DropDownPicker
-            listMode="SCROLLVIEW"
-            schema={{
-              label: 'value',
-              value: 'key'
-            }}
-            placeholder="Choose Level"
-            open={open5}
-            value={valueLevel}
-            items={itemsLevel}
-            setOpen={setOpen5}
-            setValue={setValueLevel}
-            setItems={setItems5}
-            /></View>
-            <View style={{paddingBottom:10}}>
-              <Text>Gender</Text>
+            <View style={styles.listcontainer}>
+                <View style={styles.listcontainerpad}>
+                    <ScrollView style={{flex: 1}}>
+                        <View style={{paddingBottom:10,}}>
+                            <Text style={styles.text}>Where are you going?</Text>
+                        </View>
+                        <View style={{paddingBottom:15, height: 64}}>
+                            <TextInput
+                                placeholder={'Location'}
+                                placeholderTextColor="black"
+                                value={valueLocation}
+                                onChangeText={(txt)=>setValueLocation(txt)}
+                                style={{borderWidth: 0,padding:5,flex: 1,height: 40,backgroundColor: 'white', borderRadius:8 }}
+                            />
+                        </View>
+                        <View style={{paddingBottom:10}}>
+                            <Text style={styles.text}>How long is your trip?</Text>
+                        </View>
+                        <View style={{zIndex: open ? 1: 0, paddingBottom:15 }}>
+                            <DropDownPicker
+                                listMode="SCROLLVIEW"
+                                schema={{
+                                label: 'value',
+                                value: 'key'
+                                }}
+                                placeholder="Choose trip length"
+                                open={open}
+                                value={valueTourlength}
+                                items={items}
+                                setOpen={setOpen}
+                                setValue={setValueTourlength}
+                                setItems={setItems}
+                            />
+                        </View>
+                        <View style={{paddingBottom:10}}>
+                            <Text style={styles.text}>How is the temperature like?</Text>
+                        </View>
+                        <View style={{zIndex: open2 ? 1: 0, paddingBottom:15 }}>
+                            <DropDownPicker
+                                listMode="SCROLLVIEW"
+                                schema={{
+                                label: 'value',
+                                value: 'key'
+                                }}
+                                placeholder="Choose temperature"
+                                open={open2}
+                                value={valueTemperature}
+                                items={itemsTemp}
+                                setOpen={setOpen2}
+                                setValue={setValueTemperature}
+                                setItems={setItemsTemp}
+                            />
+                        </View>
+                        <View style={{paddingBottom:10}}>
+                            <Text style={styles.text}>Is it Raining?</Text>
+                        </View>
+                        <View style={{zIndex: open3 ? 1: 0, paddingBottom:15 }}>
+                            <DropDownPicker
+                            listMode="SCROLLVIEW"
+                            schema={{
+                            label: 'value',
+                            value: 'key'
+                            }}
+                            placeholder="Is is Raining?"
+                            open={open3}
+                            value={valueRain}
+                            items={itemsRain}
+                            setOpen={setOpen3}
+                            setValue={setValueRain}
+                            setItems={setItemsRain}
+                            />
+                        </View>
+                        <View style={{paddingBottom:10}}>
+                            <Text style={styles.text}>Which kind of Terrain is it?</Text>
+                        </View>
+                        <View style={{zIndex: open4 ? 1: 0, paddingBottom:15 }}>
+                            <DropDownPicker
+                                listMode="SCROLLVIEW"
+                                schema={{
+                                label: 'value',
+                                value: 'key'
+                                }}
+                                placeholder="Choose Terrain"
+                                open={open4}
+                                value={valueTerrain}
+                                items={itemsTerreain}
+                                setOpen={setOpen4}
+                                setValue={setValueTerrain}
+                                setItems={setItemsTerreain}
+                            />
+                        </View>
+                        <View style={{paddingBottom:10}}>
+                            <Text style={styles.text}>What's your level?</Text>
+                        </View>
+                        <View style={{zIndex: open5 ? 1: 0, paddingBottom:15 }}>
+                            <DropDownPicker
+                                listMode="SCROLLVIEW"
+                                schema={{
+                                label: 'value',
+                                value: 'key'
+                                }}
+                                placeholder="Choose Level"
+                                open={open5}
+                                value={valueLevel}
+                                items={itemsLevel}
+                                setOpen={setOpen5}
+                                setValue={setValueLevel}
+                                setItems={setItems5}
+                            />
+                        </View>
+                        <View style={{paddingBottom:10}}>
+                            <Text style={styles.text}>Gender</Text>
+                        </View>
+                        <View style={{zIndex: open6 ? 1: 0, paddingBottom:15}}>
+                            <DropDownPicker
+                            listMode="SCROLLVIEW"
+                            schema={{
+                            label: 'value',
+                            value: 'key'
+                            }}
+                            placeholder="Choose Gender"
+                            open={open6}
+                            value={valueGender}
+                            items={itemsGender}
+                            setOpen={setOpen6}
+                            setValue={setValueGender}
+                            setItems={setItemsGender}
+                            />
+                        </View>
+                        <View style={{paddingBottom:10}}>
+                            <Text style={styles.text}>Top Size</Text>
+                        </View>
+                        <View style={{zIndex: open7 ? 1: 0, paddingBottom:15}}>
+                            <DropDownPicker
+                            listMode="SCROLLVIEW"
+                            schema={{
+                            label: 'value',
+                            value: 'key'
+                            }}
+                            placeholder="Top Size"
+                            open={open7}
+                            value={valueSizetop}
+                            items={itemsSizetop}
+                            setOpen={setOpen7}
+                            setValue={setValueSizetop}
+                            setItems={setItemsSizetop}
+                            />
+                        </View>
+                        <View style={{paddingBottom:10}}>
+                            <Text style={styles.text}>Bottom Size</Text>
+                        </View>
+                        <View style={{zIndex: open8 ? 1: 0, paddingBottom:15}}>
+                            <DropDownPicker
+                            listMode="SCROLLVIEW"
+                            schema={{
+                            label: 'value',
+                            value: 'key'
+                            }}
+                            placeholder="Bottom Size"
+                            open={open8}
+                            value={valueSizebottom}
+                            items={itemsSizebottom}
+                            setOpen={setOpen8}
+                            setValue={setValueSizebottom}
+                            setItems={setItemsSizebottom}
+                            />
+                        </View>
+                        <View style={{paddingBottom:10}}>
+                            <Text style={styles.text}>Food</Text>
+                        </View>
+                        <View style={{zIndex: open9 ? 1: 0, paddingBottom:15}}>
+                            <DropDownPicker
+                            listMode="SCROLLVIEW"
+                            schema={{
+                            label: 'value',
+                            value: 'key'
+                            }}
+                            placeholder="Food?"
+                            open={open9}
+                            value={valueFood}
+                            items={itemsFood}
+                            setOpen={setOpen9}
+                            setValue={setValueFood}
+                            setItems={setItemsFood}
+                            />
+                        </View>
+                        <View style={{paddingBottom:10}}>
+                            <Text style={styles.text}>Storm-Kitchen</Text>
+                        </View>
+                        <View style={{zIndex: open10 ? 1: 0, paddingBottom:15}}>
+                            <DropDownPicker
+                            listMode="SCROLLVIEW"
+                            schema={{
+                            label: 'value',
+                            value: 'key'
+                            }}
+                            placeholder="Storm-Kitchen?"
+                            open={open10}
+                            value={valueKitchen}
+                            items={itemsKitchen}
+                            setOpen={setOpen10}
+                            setValue={setValueKitchen}
+                            setItems={setItemsKitchen}
+                            />
+                        </View>
+                        <View style={{paddingBottom:10}}>
+                            <Text style={styles.text}>Sleeping Kit?</Text>
+                        </View>
+                        <View style={{zIndex: open11 ? 1: 0, paddingBottom:45}}>
+                            <DropDownPicker
+                            listMode="SCROLLVIEW"
+                            schema={{
+                            label: 'value',
+                            value: 'key'
+                            }}
+                            placeholder="Sleeping Kit?"
+                            open={open11}
+                            value={valueSleepingkit}
+                            items={itemsSleepingkit}
+                            setOpen={setOpen11}
+                            setValue={setValueSleepingkit}
+                            setItems={setItemsSleepingkit}
+                            />
+                        </View>
+                    </ScrollView >
+                </View>
             </View>
-            <View style={{zIndex: open6 ? 1: 0, paddingBottom:15}}>
-            <DropDownPicker
-            listMode="SCROLLVIEW"
-            schema={{
-              label: 'value',
-              value: 'key'
-            }}
-            placeholder="Choose Gender"
-            open={open6}
-            value={valueGender}
-            items={itemsGender}
-            setOpen={setOpen6}
-            setValue={setValueGender}
-            setItems={setItemsGender}
-            />
-            <View style={{zIndex: 2, paddingBottom:15, paddingTop: 25}}>
-            <ButtonComponent type = "primary" content={"Create Packing List"} onPress = {()=>  handleSave()}/>
+            <View style={styles.buttomcontainer}>
+                <ButtonComponent type = "primary" content={"Create Packing List"} onPress = {()=>  handleSave()}/>
             </View>
-            </View>
-            </View >
-            </View>
-      </View>
+        </View>
     );
 } 
 export default NewTourScreen;
-/*
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        top: 100
-    },
-    row: {
-        flexDirection: 'row',
-        height: 30,
-        margin: 10,
-    },
-    label: {
-        fontWeight: 'bold',
-        width: 100
-    },
-    input: {
-        borderWidth: 1,
-        padding:5,
-        flex: 1
-    },
-});*/

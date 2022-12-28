@@ -1,8 +1,10 @@
 import * as React from 'react';
-import { View, Text, Platform, FlatList, StyleSheet, Button, Alert, Image } from 'react-native';
+import { useCallback } from "react";
+import { View, Text, Platform, FlatList, StyleSheet, Button, Alert, Image, ScrollView, Linking } from 'react-native';
 import firebase from 'firebase/compat';
 import {useEffect, useState} from "react";
 import styles from './styles';
+import ButtonComponent from '../../ButtonComponent';
 
 
 const ItemDetails = ({route,navigation}) => {
@@ -10,7 +12,7 @@ const ItemDetails = ({route,navigation}) => {
     const [item,setItem] = useState({});
 
     useEffect(() => {
-        //Henter car values og sætter dem
+        //Henter genstands values og sætter dem
         setItem(route.params.item[1]);
 
         //Når vi forlader screen, tøm object
@@ -19,49 +21,23 @@ const ItemDetails = ({route,navigation}) => {
         }
     });
 
-    const handleEdit = () => {
-        // Vi navigerer videre til EditCar skærmen og sender bilen videre med
-        const car = route.params.item
-        console.log('====================================');
-        console.log(item);
-        console.log('====================================');
-        navigation.navigate('Edit Car', { car });
-    };
-
-    // Vi spørger brugeren om han er sikker
-    const confirmDelete = () => {
-        //Er det mobile?
-        if(Platform.OS ==='ios' || Platform.OS ==='android'){
-            Alert.alert('Are you sure?', 'Do you want to delete the car?', [
-                { text: 'Cancel', style: 'cancel' },
-                // Vi bruger this.handleDelete som eventHandler til onPress
-                { text: 'Delete', style: 'destructive', onPress: () => handleDelete() },
-            ]);
-        }
-    };
-
-    // Vi sletter den aktuelle bil
-    const  handleDelete = () => {
-        const id = route.params.car[0];
-        try {
-            firebase
-                .database()
-                // Vi sætter bilens ID ind i stien
-                .ref(`/Cars/${id}`)
-                // Og fjerner data fra den sti
-                .remove();
-            // Og går tilbage når det er udført
-            navigation.goBack();
-        } catch (error) {
-            Alert.alert(error.message);
-        }
-    };
-
-
     if (!item) {
         return <Text>No data</Text>;
     }
+    const url = item.link
     
+    const handlePress = useCallback(async () => {
+        // Checking if the link is supported for links with custom URL scheme.
+        const supported = await Linking.canOpenURL(url);
+    
+        if (supported) {
+          // Opening the link with some app, if the URL scheme is "http" the web link should be opened
+          // by some browser in the mobile
+          await Linking.openURL(url);
+        } else {
+          Alert.alert(`Something went wrong`);
+        }
+      }, [url]);
     //all content
     return (
         <View style={styles.container}>
@@ -74,15 +50,15 @@ const ItemDetails = ({route,navigation}) => {
 
             </View>
             <View style={styles.price}>
-                <Text style={styles.pricetext}>{item.price}</Text>
+                <Text style={styles.pricetext}>DKK {item.price},00</Text>
 
             </View>
-            <View style={styles.description}>
+            <ScrollView style={styles.description}>
                 <Text style={styles.descriptionrtexttitle}>Description</Text>
                 <Text  style={styles.descriptionrtext}>{item.description}</Text>
-            </View>
+            </ScrollView>
             <View style={styles.button}>
-
+            <ButtonComponent type = "primary" content={"Buy"} onPress = {()=> handlePress()}/>
             </View>
 
         </View>

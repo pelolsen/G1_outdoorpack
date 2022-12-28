@@ -2,45 +2,64 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: "center",
-    backgroundColor: "#23272a",
-    height: "100%",
-    width: "100%",
-  },
-  buttonsContainer: {
-    top: 80,
-    width: "100%",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  title: {
-    top: 50,
-    color: "#134737",
-    fontSize: 30,
-    fontWeight: "300",
-    textShadowColor: "rgba(0, 0, 0, 0.75)",
-    textShadowOffset: { width: -3, height: 3 },
-    textShadowRadius: 10,
-  },
-  input: {
-    borderWidth: 2,
-    padding:5,
     flex: 1,
-    borderColor: '#134737'
-},
-row: {
-    height: 100,
-    width: 250,
-    margin: 10,
-    
-},
-  scrollcontainer: {
-    top: 60,
-    justifyContent: "center",
-    alignItems: "center",
- 
-    width: "100%",
-    height: "70%",
+    backgroundColor: '#181818',
   },
+  titlecontainer: {
+      flex: 1,
+      flexDirection:"row"
+  },
+  listcontainer:{
+      flex: 6,
+      paddingHorizontal: 20
+  },
+  buttomcontainer: {
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center'
+  },
+  listcontainerpad:{
+      flex: 1
+  },
+  title:{
+    top: 60,
+    color: 'white',
+    fontSize: 20,
+    fontWeight:'bold',
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: {width: -3, height: 3},
+    textShadowRadius: 10
+},
+  flatliststyle:{
+
+  },
+  text:{
+      color: 'white',
+      fontWeight:'3000'
+  },
+  listbutton: {
+      flex: 1,
+      borderWidth: 1,
+      borderRadius:10,
+      borderColor: 'green',
+      margin: 5,
+      padding: 5,
+      height: 50,
+      justifyContent:'center'
+  },
+  backbutton:{
+    flex: 1,
+    alignItems: 'center',
+  },
+  titleinnercontainer:{
+    flex: 4,
+    alignItems: 'center'
+  },
+  homebutton:{
+    flex: 1,
+    alignItems: 'center',
+  }
+
 });
+
 export default styles;

@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     //value: { flex: 1 },
     header: {
         flex: 0.7,
-        backgroundColor: 'grey',
+        backgroundColor: '#181818',
         textAlign: 'center',
         alignItems: 'center',
         shadowColor: '#000',
@@ -20,9 +20,9 @@ const styles = StyleSheet.create({
         elevation: 5,
     },
     title: {
-        top: 70,
+        top: 60,
         color: 'white',
-        fontSize: 25,
+        fontSize: 20,
     },
     picture:{
         height: 400,
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     },
     price:{
         flex: 0.3,
-        backgroundColor:'purple',
+        backgroundColor:'#292929',
         flexDirection: 'row',
         alignItems: 'center',
     },
@@ -39,15 +39,15 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 16,
         fontWeight: 'bold',
-        left: 300
+        left: 250
     },
     description:{
-        flex: 1,
-        backgroundColor:'black'
+        flex: 0.9,
+        backgroundColor:'#181818'
     },
     button:{
-        flex: 0.5,
-        backgroundColor:'green'
+        flex: 0.6,
+        backgroundColor:'#181818'
     },
     descriptionrtext: {
         color: 'white',

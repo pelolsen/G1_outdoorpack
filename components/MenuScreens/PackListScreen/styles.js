@@ -1,70 +1,67 @@
 import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
- /*   container: {
-        flex: 1,
-        top: 100,
-        borderWidth: 1,
-        borderRadius:10,
-        borderColor: 'green',
-        margin: 5,
-        padding: 5,
-        height: 50,
-        justifyContent:'center'
-    },
-    label: { fontWeight: 'bold' },
-    view:{
-        height: '100%',
-        backgroundColor:'#181818',
-        justifyContent: 'center',
-        width: '100%'
-    },
-    text:{
-        color: 'green',
-        fontWeight:'3000'
-    },
-    title:{
-        top: 60,
-        color: 'green',
-        fontSize: 20,
-        fontWeight:'300',
-        textShadowColor: 'rgba(0, 0, 0, 0.75)',
-        textShadowOffset: {width: -3, height: 3},
-        textShadowRadius: 10
-    }
-*/
-title:{
+  container: {
+    flex: 1,
+    backgroundColor: '#181818',
+  },
+  titlecontainer: {
+      flex: 1,
+      flexDirection: 'row'
+  },
+  listcontainer:{
+      flex: 6
+  },
+  buttomcontainer: {
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center'
+  },
+  listcontainerpad:{
+      flex: 1
+  },
+  title:{
     top: 60,
-    color: 'green',
+    color: 'white',
     fontSize: 20,
-    fontWeight:'300',
+    fontWeight:'bold',
     textShadowColor: 'rgba(0, 0, 0, 0.75)',
     textShadowOffset: {width: -3, height: 3},
     textShadowRadius: 10
 },
-container: {
-    flex: 1,
-    borderWidth: 1,
-    borderRadius:10,
-    borderColor: 'green',
-    margin: 5,
-    padding: 5,
+  flatliststyle:{
+
+  },
+  text:{
+      color: 'white',
+      fontWeight:'3000'
+  },
+  listbutton: {
+      flex: 1,
+      borderWidth: 1,
+      borderRadius:10,
+      borderColor: 'green',
+      margin: 5,
+      padding: 5,
+      height: 60,
+      justifyContent:'center'
+  },
+  img:{
+    width: 50, 
     height: 50,
-    justifyContent:'center'
+    borderRadius:10
 },
-label: { fontWeight: 'bold' },
-listen: {
-    top: 100,
-},
-text:{
-    color: 'green',
-    fontWeight:'3000'
-},
-view:{
-    height: '100%',
-    backgroundColor:'#181818',
-    justifyContent: 'center',
-    width: '100%'
-},
+backbutton:{
+    flex: 1,
+    alignItems: 'center',
+  },
+  titleinnercontainer:{
+    flex: 4,
+    alignItems: 'center'
+  },
+  homebutton:{
+    flex: 1,
+    alignItems: 'center',
+  }
 
 });
 

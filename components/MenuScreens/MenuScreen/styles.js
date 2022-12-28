@@ -22,9 +22,9 @@ const styles = StyleSheet.create({
     },
     title:{
         top: 60,
-        color: 'green',
+        color: 'white',
         fontSize: 20,
-        fontWeight:'300',
+        fontWeight:'bold',
         textShadowColor: 'rgba(0, 0, 0, 0.75)',
         textShadowOffset: {width: -3, height: 3},
         textShadowRadius: 10

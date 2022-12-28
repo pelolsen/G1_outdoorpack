@@ -21,23 +21,23 @@ function MenuScreen ({navigation}) {
             <View style={styles.BigButtonsContainer}>
                 <View style={styles.twoButtonsContainer}>
                     <View style={styles.buttonsContainer}>
-                        <MenuButtonComponent style={{heigh: 200}} type = "primary" content={"New Tour"} onPress = {()=>  navigation.navigate('NewTour')}/>
+                        <MenuButtonComponent style={{heigh: 200}} type = "primary" content={"New Trip"} onPress = {()=>  navigation.navigate('NewTour')}/>
                     </View>
                     <View style={styles.buttonsContainer}>
-                        <MenuButtonComponent type = "primary" content={"Previous Tours"} onPress = {()=>  handleLogOut()}/>
-                    </View>
-                </View>
-                <View style={styles.twoButtonsContainer}>
-                    <View style={styles.buttonsContainer}>
-                        <MenuButtonComponent type = "primary" content={"To be specified"} onPress = {()=>  handleLogOut()}/>
-                    </View>
-                    <View style={styles.buttonsContainer}>
-                        <MenuButtonComponent type = "primary" content={"To be specified"} onPress = {()=>  handleLogOut()}/>
+                        <MenuButtonComponent type = "primary" content={"Previous Trips"} onPress = {()=>  navigation.navigate('PreviousTour')}/>
                     </View>
                 </View>
                 <View style={styles.twoButtonsContainer}>
                     <View style={styles.buttonsContainer}>
-                        <MenuButtonComponent type = "primary" content={"Settings"} onPress = {()=>  handleLogOut()}/>
+                        <MenuButtonComponent type = "primary" content={"Popular Packs"} onPress = {()=>  navigation.navigate('PopularPacks')}/>
+                    </View>
+                    <View style={styles.buttonsContainer}>
+                        <MenuButtonComponent type = "primary" content={"Contact Us"} onPress = {()=>  navigation.navigate('ContactScreen')}/>
+                    </View>
+                </View>
+                <View style={styles.twoButtonsContainer}>
+                    <View style={styles.buttonsContainer}>
+                        <MenuButtonComponent type = "primary" content={"Settings"} onPress = {()=>  navigation.navigate('Setting')}/>
                     </View>
                     <View style={styles.buttonsContainer}>
                         <MenuButtonComponent type = "primary" content={"Log Out"} onPress = {()=>  handleLogOut()}/>
