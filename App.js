@@ -1,21 +1,11 @@
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import StartPageComponent from './components/StartPageComponent';
-import SignInComponent from './components/SignInComponent';
-import LoginComponent from './components/LoginComponent';
 import firebase from "firebase/compat"
 import * as React from "react";
 import {useState, useEffect} from 'react'
 import StackNavigator from './components/StackNavigator';
-import MenuScreen from './components/MenuScreens/MenuScreen';
-import NewTourScreen from './components/MenuScreens/NewTourScreen';
 import LoggedinStackNavigator from './components/MenuScreens/LoggedinStackNavigator';
-import PreviousTourScreen from './components/MenuScreens/PreviousTourScreen';
-import ItemDetails from './components/MenuScreens/ItemDetails';
-import PopularPacks from './components/MenuScreens/PopularPacks';
-import ListDumpScreen from './dump/kodedump/ListDumpScreen';
-import ContactScreen from './components/MenuScreens/ContactScreen';
+
 
 
 
@@ -68,9 +58,6 @@ export default function App() {
   }
   
   return user.loggedIn ? <LogedInPage/> : <LoginPage/> ;
-  //return <ListDumpScreen/>
-  //return <PreviousTourScreen/>
-  //return <ContactScreen/>
     
 }
 

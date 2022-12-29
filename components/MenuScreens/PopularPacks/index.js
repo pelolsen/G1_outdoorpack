@@ -9,10 +9,6 @@ const PopularPacks = ({route, navigation}) => {
 
     const [list,setList] = useState()
     
-   // const dbRef = firebase.database().ref()
-   // const listID = route.params.listId
-    //console.log(listID);
-    
     useEffect(() => {
         
         if(!list) {
@@ -31,9 +27,7 @@ const PopularPacks = ({route, navigation}) => {
     }
 
     const handleSelectItem = id => {
-        /*Her søger vi direkte i vores array af biler og finder bil objektet som matcher idet vi har tilsendt*/
         const item = Object.entries(list).find( item => item[0] === id /*id*/)
-        //Mangler at lave Item details
         console.log(item);
         navigation.navigate('Item Details', { item });
     };
@@ -50,7 +44,6 @@ const PopularPacks = ({route, navigation}) => {
         <FlatList
             data={itemArray}
             style={styles.listen}
-            // Vi bruger carKeys til at finde ID på den aktuelle bil og returnerer dette som key, og giver det med som ID til CarListItem
             keyExtractor={(item, index) => itemKeys[index]}
             renderItem={({ item, index }) => {
                 //console.log([item, index]);

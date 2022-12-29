@@ -37,7 +37,7 @@ const SignInComponent = ({navigation})=> {
         <View style={styles.allcontainer}>
         <View style={styles.signincontainer}>
             <View style={styles.titles}>
-                <Text style={styles.title}>Sign In</Text>
+                <Text style={styles.title}>Sign Up</Text>
             </View>
             <View style={styles.textinputcontainer}>
                 <TextInput
@@ -61,7 +61,7 @@ const SignInComponent = ({navigation})=> {
 
         </View>
         <View style={styles.buttonsContainer}>
-            <ButtonComponent type = "primary" content={"Sign In"} onPress = {()=>  handleSubmit()}/>
+            <ButtonComponent type = "primary" content={"Sign Up"} onPress = {()=>  handleSubmit()}/>
         </View>
         </View>
       </View>

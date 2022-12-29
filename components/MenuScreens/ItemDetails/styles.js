@@ -6,8 +6,6 @@ const styles = StyleSheet.create({
         padding: 5,
         flexDirection: 'row',
     },
-    //label: { width: 100, fontWeight: 'bold' },
-    //value: { flex: 1 },
     header: {
         flex: 0.7,
         backgroundColor: '#181818',
